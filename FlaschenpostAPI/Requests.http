@@ -14,7 +14,7 @@ Accept: application/json
 ###
 
 // task / question 2 : Which beers cost exactly €17.99? Order the result by price per litre (cheapest first).
-// I choosed another parameter for the price. Here 17.99.
+// I choosed a parameter for the price. Here 17.99.
 GET {{FlaschenpostApi_HostAddress}}/api/products/GetProductsForSpecificPrice?url={{FlaschenpostDataURL}}&price=17.99
 Accept: application/json
 
