@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlaschenpostAPI", "FlaschenpostAPI\FlaschenpostAPI.csproj", "{36A9EC9F-3DDC-41F2-862C-22384AE450BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36A9EC9F-3DDC-41F2-862C-22384AE450BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36A9EC9F-3DDC-41F2-862C-22384AE450BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36A9EC9F-3DDC-41F2-862C-22384AE450BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36A9EC9F-3DDC-41F2-862C-22384AE450BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {88EE0239-636E-4563-8F07-F1D5B3F0C973}
+	EndGlobalSection
+EndGlobal

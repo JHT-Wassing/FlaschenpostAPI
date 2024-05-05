@@ -1,0 +1,38 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+@FlaschenpostApi_HostAddress = http://localhost:5047
+@FlaschenpostDataURL = https://flapotest.blob.core.windows.net/test/ProductData.json
+
+// Response model contains new custom propertys PricePerLitre and the amount of Bottles
+// In the task sheet was no writing, what the output should look like. So i kept it in there
+
+
+// task / question 1 : Most expensive and cheapest beer per litre.
+GET {{FlaschenpostApi_HostAddress}}/api/products/GetMostExpensiveAndCheapestProduct?url={{FlaschenpostDataURL}}
+Accept: application/json
+
+###
+
+// task / question 2 : Which beers cost exactly €17.99? Order the result by price per litre (cheapest first).
+// I choosed another parameter for the price. Here 17.99.
+GET {{FlaschenpostApi_HostAddress}}/api/products/GetProductsForSpecificPrice?url={{FlaschenpostDataURL}}&price=17.99
+Accept: application/json
+
+###
+
+// task / question 3 : Which one product comes in the most bottles?
+GET {{FlaschenpostApi_HostAddress}}/api/products/GetProductsWithTheMostBottles?url={{FlaschenpostDataURL}}
+Accept: application/json
+
+
+###
+
+// task / question 4 : It also has one route to get the answer to all routes or questions at once.
+// because i choosed to use a parameter for the price at task 2, i had to do it here again.
+GET {{FlaschenpostApi_HostAddress}}/api/products/GetProductsOfAllQuestions?url={{FlaschenpostDataURL}}&price=17.99
+Accept: application/json
+
+
+// Krombacher Hell with article id 740 in Response 2 times included
+// you could search and remove the duplicates in the response list or even check bevor adding to list, if the product and the article with given id already exists
+// but for this task, it should be fine
