@@ -5,6 +5,8 @@
 
 // Response model contains new custom propertys PricePerLitre and the amount of Bottles
 // In the task sheet was no writing, what the output should look like. So i kept it in there
+// i could have create another Model for the customized Data. So that there is the exact model for the deserialize, one for the logic after transformation and different models for
+// response. But for this task i did not.
 
 
 // task / question 1 : Most expensive and cheapest beer per litre.
