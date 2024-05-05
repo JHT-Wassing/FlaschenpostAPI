@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace FlaschenpostAPI.Models
+﻿namespace FlaschenpostAPI.Models
 {
     public class Article
     {

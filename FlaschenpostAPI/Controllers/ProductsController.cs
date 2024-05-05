@@ -16,7 +16,7 @@ namespace FlaschenpostAPI.Controllers
         }
 
         /// <summary>
-        /// Read Data from given URL and desirialize
+        /// Read Data from given URL and deserialize
         /// Select most expensive and cheapest product (beer per litre).
         /// </summary>
         /// <param name="url"></param>
@@ -36,7 +36,7 @@ namespace FlaschenpostAPI.Controllers
         }
 
         /// <summary>
-        /// Read Data from given URL and desirialize
+        /// Read Data from given URL and deserialize
         /// Select product with most Bottles in articles
         /// </summary>
         /// <param name="url"></param>
@@ -56,7 +56,7 @@ namespace FlaschenpostAPI.Controllers
         }
 
         /// <summary>
-        /// Read Data from given URL and desirialize
+        /// Read Data from given URL and deserialize
         /// Select Products with exact given price
         /// </summary>
         /// <param name="url"></param>
@@ -76,7 +76,7 @@ namespace FlaschenpostAPI.Controllers
         }
 
         /// <summary>
-        /// Read Data from given URL and desirialize
+        /// Read Data from given URL and deserialize
         /// Answer all questions from above
         /// Important: The response is a concatinated list of 3 questions. Not combined!
         /// </summary>

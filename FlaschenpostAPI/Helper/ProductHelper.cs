@@ -1,6 +1,4 @@
-﻿using FlaschenpostAPI.Models;
-
-namespace FlaschenpostAPI.Helper
+﻿namespace FlaschenpostAPI.Helper
 {
     public static class ProductHelper
     {
