@@ -19,7 +19,7 @@
                     // Text looks like: "(1,80 €/Liter)"
                     // --> start after first character, then look for "€" and substract 1
                     var subtext = pricePerUnitText.Substring(1, pricePerUnitText.IndexOf("€") - 1);
-                    
+
                     subtext = subtext.Trim();
 
                     _ = double.TryParse(subtext, out pricePerLitre);
@@ -42,19 +42,19 @@
 
             if (!string.IsNullOrEmpty(shortDescription))
             {
-                if (shortDescription.Length>0)
+                if (shortDescription.Length > 0)
                 {
                     // Get substring from shortDescription
                     // Text looks like: "20 x 0,5L (Glas)"
                     // --> start from beginning, then look for "x" and substract 1
-                    var subtext = shortDescription.Substring(0, shortDescription.IndexOf("x")-1);
+                    var subtext = shortDescription.Substring(0, shortDescription.IndexOf("x") - 1);
 
                     // trim to delete whitespaces
                     subtext = subtext.Trim();
 
                     _ = int.TryParse(subtext, out amountOfBottles);
                 }
-                
+
             }
 
             // if parsing was successful, amount of bottles will be returned. Otherwise 0

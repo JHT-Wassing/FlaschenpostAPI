@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using FlaschenpostAPI.Services;
+﻿using FlaschenpostAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FlaschenpostAPI.Controllers
 {
@@ -27,9 +27,26 @@ namespace FlaschenpostAPI.Controllers
         [HttpGet("GetMostExpensiveAndCheapestProduct")]
         public async Task<IActionResult> GetMostExpensiveAndCheapestProduct(string url)
         {
-            var products = await _productService.ReadProductsFromGivenUrlAsync(url);
+            var response = await _productService.SelectMostExpensiveAndCheapestProduct(url);
 
-            var response = _productService.SelectMostExpensiveAndCheapestProduct(products);
+            return Ok(response);
+
+        }
+
+        /// <summary>
+        /// Read Data from given URL and deserialize
+        /// Select Products with exact given price
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns>
+        /// Status 200
+        /// List of Products with the given price (for example 17,99€)
+        /// </returns>
+        [HttpGet("GetProductsForSpecificPrice")]
+        public async Task<IActionResult> GetProductsForSpecificPrice(string url, double price)
+        {
+
+            var response = await _productService.SelectProductsForSpecificPrice(url, price);
 
             return Ok(response);
 
@@ -47,29 +64,8 @@ namespace FlaschenpostAPI.Controllers
         [HttpGet("GetProductsWithTheMostBottles")]
         public async Task<IActionResult> GetProductsWithMostBottles(string url)
         {
-            var products = await _productService.ReadProductsFromGivenUrlAsync(url);
 
-            var response = _productService.SelectProductsWithTheMostBottles(products);
-
-            return Ok(response);
-
-        }
-
-        /// <summary>
-        /// Read Data from given URL and deserialize
-        /// Select Products with exact given price
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns>
-        /// Status 200
-        /// List of Products with the given price (for example 17,99€)
-        /// </returns>
-        [HttpGet("GetProductsForSpecificPrice")]
-        public async Task<IActionResult> GetProductsFor1799(string url, double price)
-        {
-            var products = await _productService.ReadProductsFromGivenUrlAsync(url);
-
-            var response = _productService.SelectProductsForSpecificPrice(products, price);
+            var response = await _productService.SelectProductsWithTheMostBottles(url);
 
             return Ok(response);
 
@@ -91,9 +87,8 @@ namespace FlaschenpostAPI.Controllers
         [HttpGet("GetProductsOfAllQuestions")]
         public async Task<IActionResult> GetProductsOfAllQuestions(string url, double price)
         {
-            var products = await _productService.ReadProductsFromGivenUrlAsync(url);
 
-            var response = _productService.SelectProductsWithAllQuestions(products, price);
+            var response = await _productService.SelectProductsWithAllQuestions(url, price);
 
             return Ok(response);
 

@@ -8,6 +8,8 @@
 
 
 // task / question 1 : Most expensive and cheapest beer per litre.
+// List of Products because it is possible, that there are multiple Products with the same lowest or hightes pricePerLitre!
+// Created a ResponseModel to organize the respone in 2 groups. Most expensive and cheapest
 GET {{FlaschenpostApi_HostAddress}}/api/products/GetMostExpensiveAndCheapestProduct?url={{FlaschenpostDataURL}}
 Accept: application/json
 
@@ -15,12 +17,14 @@ Accept: application/json
 
 // task / question 2 : Which beers cost exactly €17.99? Order the result by price per litre (cheapest first).
 // I choosed a parameter for the price. Here 17.99.
+// no Extra ResponseModel. Product Data is enough
 GET {{FlaschenpostApi_HostAddress}}/api/products/GetProductsForSpecificPrice?url={{FlaschenpostDataURL}}&price=17.99
 Accept: application/json
 
 ###
 
 // task / question 3 : Which one product comes in the most bottles?
+// no Extra ResponseModel. Product Data is enough
 GET {{FlaschenpostApi_HostAddress}}/api/products/GetProductsWithTheMostBottles?url={{FlaschenpostDataURL}}
 Accept: application/json
 
@@ -29,10 +33,6 @@ Accept: application/json
 
 // task / question 4 : It also has one route to get the answer to all routes or questions at once.
 // because i choosed to use a parameter for the price at task 2, i had to do it here again.
+// Created a ResponseModel to organize the respone in 3 groups. Most expensive and cheapest, products for a price and most bottles
 GET {{FlaschenpostApi_HostAddress}}/api/products/GetProductsOfAllQuestions?url={{FlaschenpostDataURL}}&price=17.99
 Accept: application/json
-
-
-// Krombacher Hell with article id 740 in Response 2 times included
-// you could search and remove the duplicates in the response list or even check bevor adding to list, if the product and the article with given id already exists
-// but for this task, it should be fine

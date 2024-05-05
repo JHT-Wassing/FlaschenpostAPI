@@ -1,36 +1,33 @@
-﻿using FlaschenpostAPI.Contracts.Responses;
+﻿using FlaschenpostAPI.Contracts.Responses.AllQuestions;
+using FlaschenpostAPI.Contracts.Responses.ExpensiveAndCheapest;
+using FlaschenpostAPI.Contracts.Responses.General;
+using FlaschenpostAPI.Data.Models;
+using FlaschenpostAPI.Data.Repos;
 using FlaschenpostAPI.Helper;
-using FlaschenpostAPI.Models;
-using Newtonsoft.Json;
 
 namespace FlaschenpostAPI.Services
 {
     public class ProductService : IProductService
     {
-        private readonly HttpClient _httpClient = new();
 
-        public async Task<List<Product>> ReadProductsFromGivenUrlAsync(string url)
+        private readonly IProductRepository _productRepository;
+
+        public ProductService(IProductRepository productRepository)
         {
-
-            var response = await _httpClient.GetAsync(url);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonMessage = await response.Content.ReadAsStringAsync();
-                var products = JsonConvert.DeserializeObject<List<Product>>(jsonMessage);
-
-                if (products != null && products.Count > 0)
-                {
-                    products = TransformData(products);
-                    return products;
-                }
-            }
-
-            return new List<Product>();
+            _productRepository = productRepository;
         }
 
-        public List<ProductResponse> SelectMostExpensiveAndCheapestProduct(List<Product> products)
+        public async Task<MostExpensiveAndCheapestProductResponse> SelectMostExpensiveAndCheapestProduct(string url)
         {
+            var products = await _productRepository.GetProductsFromGivenUrlAsync(url);
+
+            return SelectMostExpensiveAndCheapestProduct(products);
+        }
+
+        public MostExpensiveAndCheapestProductResponse SelectMostExpensiveAndCheapestProduct(List<Product> products)
+        {
+            products = TransformData(products);
+
             // using lists, because multiple products could have the exact same litre price
             var expensiveList = new List<ProductResponse>();
             var cheapestList = new List<ProductResponse>();
@@ -88,15 +85,27 @@ namespace FlaschenpostAPI.Services
                 }
             }
 
-            var response = new List<ProductResponse>();
-            response.AddRange(expensiveList);
-            response.AddRange(cheapestList);
+            var response = new MostExpensiveAndCheapestProductResponse()
+            {
+                MostExpensiveProducts = expensiveList,
+                CheapestProducts = cheapestList
+            };
 
             return response;
         }
 
+        public async Task<List<ProductResponse>> SelectProductsForSpecificPrice(string url, double price)
+        {
+            var products = await _productRepository.GetProductsFromGivenUrlAsync(url);
+
+            return SelectProductsForSpecificPrice(products, price);
+        }
+
         public List<ProductResponse> SelectProductsForSpecificPrice(List<Product> products, double price)
         {
+
+            products = TransformData(products);
+
             var response = new List<ProductResponse>();
 
             foreach (var product in products)
@@ -118,14 +127,24 @@ namespace FlaschenpostAPI.Services
                     }
                 }
             }
-
+            // sort by price per litre 
             return response.OrderBy(r => r.Article?.PricePerLitre).ToList();
+        }
+
+
+        public async Task<List<ProductResponse>> SelectProductsWithTheMostBottles(string url)
+        {
+            var products = await _productRepository.GetProductsFromGivenUrlAsync(url);
+            return SelectProductsWithTheMostBottles(products);
         }
 
         public List<ProductResponse> SelectProductsWithTheMostBottles(List<Product> products)
         {
             var response = new List<ProductResponse>();
             var mostBottles = 0;
+
+            products = TransformData(products);
+
 
             foreach (var product in products)
             {
@@ -174,23 +193,30 @@ namespace FlaschenpostAPI.Services
             return response;
         }
 
-        public List<ProductResponse> SelectProductsWithAllQuestions(List<Product> products, double price)
+        public async Task<AllQuestionsResponse> SelectProductsWithAllQuestions(string url, double price)
         {
+            var products = await _productRepository.GetProductsFromGivenUrlAsync(url);
+
+            return SelectProductsWithAllQuestions(products, price);
+        }
+
+        public AllQuestionsResponse SelectProductsWithAllQuestions(List<Product> products, double price)
+        {
+
+            products = TransformData(products);
+
             var expensiveAndCheapestProduct = SelectMostExpensiveAndCheapestProduct(products);
 
             var productsforPrice = SelectProductsForSpecificPrice(products, price);
 
             var productsWithTheMostBottles = SelectProductsWithTheMostBottles(products);
 
-
-
-            var response = new List<ProductResponse>();
-
-            response.AddRange(expensiveAndCheapestProduct);
-            response.AddRange(productsforPrice);
-            response.AddRange(productsWithTheMostBottles);
-
-            // remove duplicates?
+            var response = new AllQuestionsResponse()
+            {
+                MostExpensiveAndCheapestProducts = expensiveAndCheapestProduct,
+                ProductsForSpecificPrice = productsforPrice,
+                ProductsWithMostBottles = productsWithTheMostBottles
+            };
 
             return response;
         }

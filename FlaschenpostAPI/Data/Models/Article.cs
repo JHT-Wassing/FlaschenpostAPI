@@ -1,4 +1,4 @@
-﻿namespace FlaschenpostAPI.Models
+﻿namespace FlaschenpostAPI.Data.Models
 {
     public class Article
     {
@@ -9,9 +9,9 @@
         public string PricePerUnitText { get; set; } = "";
         public string? Image { get; set; }
 
+
         // Custom Property
         public double PricePerLitre { get; set; }
         public int Bottles { get; set; }
-
     }
 }

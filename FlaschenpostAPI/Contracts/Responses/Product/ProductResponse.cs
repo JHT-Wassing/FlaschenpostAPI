@@ -1,6 +1,6 @@
-﻿using FlaschenpostAPI.Models;
+﻿using FlaschenpostAPI.Data.Models;
 
-namespace FlaschenpostAPI.Contracts.Responses
+namespace FlaschenpostAPI.Contracts.Responses.General
 {
     public class ProductResponse
     {
@@ -11,6 +11,6 @@ namespace FlaschenpostAPI.Contracts.Responses
         public string? DescriptionText { get; set; }
 
         public Article? Article { get; set; }
-    
+
     }
 }

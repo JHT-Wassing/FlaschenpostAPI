@@ -1,4 +1,4 @@
-﻿namespace FlaschenpostAPI.Models
+﻿namespace FlaschenpostAPI.Data.Models
 {
     public class Product
     {
